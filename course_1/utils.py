@@ -60,26 +60,18 @@ def read_data(inputfile):
     return X_train,y_train
 
 def mean_normalization(X_train):
-    X_train_mean = np.empty_like(X_train)
-    X_train_mu = np.empty_like(X_train)
-    for i in range(X_train.shape[1]):
-        mu = np.mean(X_train[:,i])
-        X_train_mu[:,i] = X_train[:,i] - mu
-        xmax = np.max(X_train[:,i])
-        xmin = np.min(X_train[:,i])
+    mu = np.mean(X_train,axis=0)
+    xmax = np.max(X_train,axis=0)
+    xmin = np.min(X_train,axis=0)
     
-        X_train_mean[:,i] = X_train_mu[:,i]/(xmax - xmin)
+    X_mean = (X_train - mu)/(xmax - xmin)
 
-    return X_train_mean,X_train_mu
+    return X_mean,mu,(xmax - xmin)
 
 def zscore_normalization(X_train):
-    X_train_zscore = np.empty_like(X_train)
-    X_train_mu = np.empty_like(X_train)
-    for i in range(X_train.shape[1]):
-        mu = np.mean(X_train[:,i])
-        sigma = np.std(X_train[:,i])
-        X_train_mu[:,i] = X_train[:,i] - mu
-        
-        X_train_zscore[:,i] = X_train_mu[:,i]/sigma
+    mu = np.mean(X_train,axis=0)
+    sigma = np.std(X_train,axis=0)
 
-    return X_train_zscore,X_train_mu
+    X_zscore = (X_train - mu)/sigma
+
+    return X_zscore,mu,sigma

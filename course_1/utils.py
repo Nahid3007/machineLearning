@@ -1,6 +1,6 @@
 import numpy as np
 
-def gradient_descent(X_train,y_train,w_init,b_init,num_iter,alpha):
+def gradient_descent(X_train,y_train,num_iter,alpha):
     
     m = X_train.shape[0] # number of training examples
     try:
@@ -9,8 +9,8 @@ def gradient_descent(X_train,y_train,w_init,b_init,num_iter,alpha):
         TypeError()
         n = 1 # if only a single feature is present
 
-    w = w_init
-    b = b_init
+    w = np.zeros(n)
+    b = 0.
 
     # run gardient descent
     J_hist = []
@@ -38,10 +38,7 @@ def gradient_descent(X_train,y_train,w_init,b_init,num_iter,alpha):
                 except:
                     IndexError()
                     dj_dw[j] += cost*X_train[i] # if only a single feature is present
-            if n == 1:
-                dj_db += cost[0]
-            else:
-                dj_db += cost
+            dj_db += cost
          
         dj_dw = dj_dw/m
         dj_db = dj_db/m

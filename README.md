@@ -1,4 +1,3 @@
-# Introduction into Machine Learning
+# Content
 
-## Course 1
-* Linear and Logisitic Regession
+A "container" with machine learning topics applied to general as well as computer aided engineering topics.
